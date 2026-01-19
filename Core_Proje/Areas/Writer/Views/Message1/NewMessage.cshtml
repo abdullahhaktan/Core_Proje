@@ -1,0 +1,136 @@
+﻿@model EntityLayer.Concrete.WriterMessage
+
+@{
+    ViewBag.Title = "NewMessage";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Compose Message</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <!-- Theme style -->
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.css">
+
+    <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote.min.js"></script>
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+<body class="hold-transition sidebar-mini">
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h3>Yeni Mesaj Sayfası</h3>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                @await Html.PartialAsync("/Areas/Writer/Views/Message1/MessageListMenu.cshtml")
+                <!-- /.col -->
+
+                <div class="col-md-9">
+                    @using (Html.BeginForm("NewMessageSend", "Message1", new { area = "Writer", id = "composeForm", enctype = "multipart/form-data" }, FormMethod.Post))
+                    {
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">Yeni Mesaj Gönder</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="form-group">
+                                    @Html.Label("Alıcı Mail")
+                                    @{
+                                        if (!string.IsNullOrEmpty(TempData["SenderMail"]?.ToString()))
+                                        {
+                                            <input class="form-control" name="ReceiverMail" value="@TempData["SenderMail"]" placeholder="Alıcı Maili"/>
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(Html => Html.ReceiverMail, new { @class = "form-control", PlaceHolder = "Alıcı Maili" })
+                                        }
+                                    }
+                                    @Html.ValidationMessageFor(Html => Html.ReceiverMail, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Konu")
+                                    @Html.TextBoxFor(Html => Html.Subject, new { @class = "form-control", PlaceHolder = "Konu" })
+                                    @Html.ValidationMessageFor(Html => Html.Subject, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Mesaj İçeriği")
+                                    @Html.TextAreaFor(model => model.MessageContent, new { @class = "form-control", style = "height:300px", id = "compose-textarea" })
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-primary" id="saveDraftButton">
+                                        <i class="fas fa-pencil-alt"></i> Taslaklara Kaydet
+                                    </button>
+                                    <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder </button>
+                                </div>
+                                <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> İptal et</button>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                    }
+                    <!-- /.card -->
+                </div>
+
+                <!-- /.col -->
+
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <!-- /.content-wrapper -->
+    <!-- Control Sidebar -->
+    <!-- /.control-sidebar -->
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <!-- jQuery -->
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE demo -->
+    <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
+    <!-- Summernote -->
+    <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#compose-textarea').summernote();
+
+            $('#saveInDraft').click(function(){
+                $("#composeForm").attr('action','/Message/SaveInDraft');
+                $('#composeForm').submit();
+            });
+        });
+    </script>
+
+
+@*     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ *@
+
+
+</body>
+</html>

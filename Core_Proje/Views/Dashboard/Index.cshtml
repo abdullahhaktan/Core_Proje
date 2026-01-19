@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Corona Admin</title>
+
+    <link rel="stylesheet" href="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+</head>
+
+<body>
+
+    <!-- 📄 PDF İndir Butonu -->
+    <div style="margin-bottom: 20px;">
+        <button id="downloadCv" class="btn btn-primary">CV'yi PDF Olarak İndir</button>
+    </div>
+
+    <!-- 📄 PDF'e çevrilecek alan -->
+    <div id="cv-content">
+        @await Component.InvokeAsync("FeatureStatistics")
+
+        <div class="row">
+            @await Component.InvokeAsync("Last5Projects")
+        </div>
+
+        @await Component.InvokeAsync("StatisticsDashboard2")
+        @await Component.InvokeAsync("ProjectList")
+
+        <div class="row">
+            <div class="col-xl-6 col-sm-6 grid-margin stretch-card">
+                @await Component.InvokeAsync("MessageList")
+            </div>
+
+            <div class="col-xl-6 col-sm-6 grid-margin stretch-card">
+                @await Component.InvokeAsync("ToDoListPanel")
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <!-- JS Kütüphaneleri -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- PDF Oluşturma Kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Diğer JS Dosyaları -->
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/off-canvas.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/hoverable-collapse.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/misc.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/settings.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/todolist.js"></script>
+    <script src="~/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/dashboard.js"></script>
+
+    <!-- 🔘 Sayfa yüklenince uyarı gösteren kısım -->
+    <script>
+        $(document).ready(function () {
+            var successMessage = '@Context.Request.Query["msg"]';
+            if (successMessage) {
+                swal({
+                    title: "Dikkat",
+                    text: "Vitrin Panelini görebilmek için önce admin kısmında hakkımda ve başlık kısımlarını girmeniz gerekmektedir !",
+                    icon: "warning",
+                    button: "Tamam",
+                });
+            }
+        });
+    </script>
+
+    <!-- 📄 PDF Oluşturma Scripti -->
+    <script>
+        document.getElementById("downloadCv").addEventListener("click", function () {
+            const element = document.getElementById("cv-content");
+
+            const opt = {
+                margin: 0.5,
+                filename: 'cv.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
+
+</body>
+</html>

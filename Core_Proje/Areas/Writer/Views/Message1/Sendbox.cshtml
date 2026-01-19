@@ -1,0 +1,106 @@
+﻿@model List<EntityLayer.Concrete.WriterMessage>
+@{
+    ViewBag.Title = "Gelen Kutusu";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+    int totalPages = ViewBag.TotalPages;
+    int currentPage = ViewBag.CurrentPage;
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h2>Giden Mesaj Sayfası</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            @await Html.PartialAsync("/Areas/Writer/Views/Message1/MessageListMenu.cshtml")
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Giden Mesajlar</h3>
+                        @await Html.PartialAsync("/Areas/Writer/Views/Message1/Searching.cshtml")
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="mailbox-controls">
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                <i class="far fa-square"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
+                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+                        </div>
+
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody id="messageTable">
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="icheck-primary">
+                                                    <input type="checkbox" value="" id="check@item.WriterMessageID">
+                                                    <label for="check@item.WriterMessageID"></label>
+                                                </div>
+                                            </td>
+                                            <td class="mailbox-star">
+                                                <a href="/Message/GetMessageDetails/@item.WriterMessageID">
+                                                    <i class="fas fa-star text-warning"></i>
+                                                </a>
+                                            </td>
+                                            <td class="mailbox-name">
+                                                <a href="@Url.Action("GetMessageDetails", "Message1", new { area = "Writer", id = item.WriterMessageID })">@item.ReceiverMail</a>
+                                            </td>
+                                            <td class="mailbox-subject">
+                                                <b>@item.Subject</b> - @(item.MessageContent.Length > 50 ? item.MessageContent.Substring(0, 30) + "..." : item.MessageContent)
+                                            </td>
+                                            <td class="mailbox-date">@(((DateTime)item.MessageDate).ToShortDateString())</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card-footer p-3">
+                        <nav aria-label="Sayfalama">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="/Writer/Message1/Inbox?page=@(currentPage - 1)" aria-label="Önceki">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+
+                                @for (int i = 1; i <= totalPages; i++)
+                                {
+                                    <li class="page-item @(i == currentPage ? "active" : "")">
+                                        <a class="page-link" href="/Writer/Message1/Sendbox?page=@i">@i</a>
+                                    </li>
+                                }
+
+                                <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                                    <a class="page-link" href="/Writer/Message1/Sendbox?page=@(currentPage + 1)" aria-label="Sonraki">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @await Html.PartialAsync("/Areas/Writer/Views/Message1/Scripts.cshtml")
+</body>
+</html>

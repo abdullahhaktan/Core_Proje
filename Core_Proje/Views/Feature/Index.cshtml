@@ -1,0 +1,66 @@
+﻿@model EntityLayer.Concrete.Feature
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+@using (Html.BeginForm("Index", "Feature", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.FeatureID)
+    <br />
+    <label>Başlık</label>
+    @Html.TextBoxFor(x => x.Header, new { @class = "form-control" })
+    <br />
+    <label>Ad Soyad</label>
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    <label>Görev</label>
+    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success">Güncelle</button>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        // TempData başarı mesajı gösterimi
+        var successMessage = '@(TempData["SuccessMessage"] ?? "")';
+        if (successMessage) {
+            swal({
+                title: "İşlem başarılı!",
+                text: successMessage,
+                icon: "success",
+                buttons: {
+                    cancel: { 
+                        text: "Tamam", 
+                        value: false,
+                        visible: true, 
+                        className: "btn-danger", 
+                        closeModal: true, 
+                    },
+                    confirm: { 
+                        text: "Siteye git",
+                        value: true,
+                        visible: true,
+                        className: "btn-success",
+                        closeModal: true 
+                    }
+                }
+            }).then((value) => {
+
+                if (value) {
+                    window.location.href = '@Url.Action("Index", "Default")'; 
+                } else { 
+
+                    console.log("İşlem iptal edildi.");
+                }
+            });
+        }
+    });
+</script>

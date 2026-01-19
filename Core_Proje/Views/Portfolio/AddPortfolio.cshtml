@@ -1,0 +1,78 @@
+﻿@model EntityLayer.Concrete.Portfolio
+
+@{
+    ViewData["Title"] = "AddPortfolio";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddPortfolio", "Portfolio", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description"> Yeni Proje Ekleme Paneli </p>
+                <form class="forms-sample">
+                    <br />
+                    @Html.Label("Proje Başlığı")
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Name)
+                    <br />
+                    <label>Proje Url</label>
+                    @Html.TextBoxFor(x => x.ProjectUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ProjectUrl)
+                    <br />
+                    <div class="form-group">
+                        <label>Proje için resim seç</label>
+                        <br />
+                        <br />
+                        <input type="file" asp-for="Image">
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Proje için 2. resmi seç</label>
+                        <br />
+                        <br />
+                        <input type="file" asp-for="Image1">
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>projeye ait ekran görüntüsü 1</label>
+                        <br />
+                        <br />
+                        <input type="file" asp-for="screenShotImage">
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>projeye ait ekran görüntüsü 2</label>
+                        <br />
+                        <br />
+                        <input type="file" asp-for="screenShotImage1">
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>projeye ait ekran görüntüsü 3</label>
+                        <br />
+                        <br />
+                        <input type="file" asp-for="screenShotImage2">
+                    </div>
+                    <br />
+                    <label>Fiyat</label>
+                    @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Price)
+                    <br />
+                    <label>Tamamlanma Oranı</label>
+                    @Html.TextBoxFor(x => x.Value, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Value)
+                    <br />
+                    <label>Platform</label>
+                    @Html.TextBoxFor(x => x.Platform, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Platform)
+                    <br />
+                    <br />
+                    <button class="btn btn-info">Kaydet</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}

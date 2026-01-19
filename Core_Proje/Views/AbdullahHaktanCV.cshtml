@@ -1,0 +1,391 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilgisayar Mühendisi | Full-Stack Developer</title>
+    <link rel="stylesheet" href="~/Template/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Template/css/aos.css" />
+    <link rel="stylesheet" href="~/Template/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body id="top">
+
+    @await Html.PartialAsync("HeaderPartial")
+    @await Html.PartialAsync("NavbarPartial")
+
+    <!-- PDF İndir Butonu -->
+    <div style="text-align: center; margin: 20px 0;">
+        <button id="downloadPage" class="btn btn-primary" style="padding: 10px 20px; font-size: 16px;">
+            📄 Sayfayı PDF Olarak İndir
+        </button>
+    </div>
+
+    <div class="page-content">
+        <div id="content">
+
+            @using EntityLayer.Concrete
+            @model List<Feature>
+
+            <!-- HEADER -->
+            <header>
+                <div class="cover bg-light">
+                    <div class="container px-3">
+                        <div class="row">
+                            <div class="col-lg-6 p-2">
+                                <img class="img-fluid" src="~/Template/images/illustrations/hello3.svg" alt="hello" />
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mt-5">
+                                    <p class="lead text-uppercase mb-1">Merhaba!</p>
+                                    <h1 class="intro-title marker" data-aos="fade-left" data-aos-delay="50">Abdullah Haktan</h1>
+                                    <p class="lead fw-normal mt-3" data-aos="fade-up" data-aos-delay="100">Bilgisayar Mühendisi | Full-Stack Developer</p>
+                                    @await Component.InvokeAsync("SocialMediaList")
+                                    <div class="mt-3" data-aos="fade-up" data-aos-delay="200">
+                                        <a class="btn btn-primary shadow-sm mt-1 hover-effect" href="#contact">Bana Ulaşın <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wave-bg"></div>
+            </header>
+
+            <!-- ABOUT -->
+            <div class="section pt-4 px-3 px-lg-4" id="about">
+                <div class="container-narrow">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 class="h4 my-2">Bilgisayar Mühendisi - Full-Stack .NET Developer</h2>
+                            <p>Atatürk Üniversitesi Bilgisayar Mühendisliği mezunuyum. Gelişime açık ve öğrenmeye hevesli biriyim. .NET / Back-end geliştirme alanlarına ilgim yüksek.</p>
+                            <div class="row mt-3">
+                                <div class="col-sm-2"><div class="pb-1">Yaş:</div></div>
+                                <div class="col-sm-10"><div class="pb-1 fw-bolder">22</div></div>
+
+                                <div class="col-sm-2"><div class="pb-1">Mail:</div></div>
+                                <div class="col-sm-10"><div class="pb-1 fw-bolder">abdullahhaktan9@gmail.com</div></div>
+
+                                <div class="col-sm-2"><div class="pb-1">Telefon:</div></div>
+                                <div class="col-sm-10"><div class="pb-1 fw-bolder">+90 531 494 5538</div></div>
+
+                                <div class="col-sm-2"><div class="pb-1">Adres:</div></div>
+                                <div class="col-sm-10"><div class="pb-1 fw-bolder">Şükrüpaşa Mah. Selami Altınok Cad. 16/2/2 Erzurum/Yakutiye</div></div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 offset-md-1" data-aos="fade-left" data-aos-delay="100">
+                            <img class="avatar img-fluid mt-2 rounded-circle" src="@Url.Content("~/abdullah.jpg")" width="400" height="400" alt="Abdullah Haktan" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICES -->
+            <div class="section px-3 px-lg-4 pt-5" id="services">
+                <div class="container-narrow">
+                    <div class="text-center mb-5"><h2 class="marker marker-center">Hizmetlerim</h2></div>
+                    <div class="text-center"><p class="mx-auto mb-3" style="max-width:600px">Aşağıdaki başlıklarda hizmet vermekteyim. Detay için iletişim kısmından ulaşabilirsiniz.</p></div>
+                    <div class="row py-3">
+                        <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="100">
+                            <img class="mb-2" src="@Url.Content("~/hizmet1.jpg")" width="96" height="96" alt="web development" />
+                            <div class="h5">Web Geliştirme</div>
+                        </div>
+                        <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="200">
+                            <img class="mb-2" src="@Url.Content("~/hizmet2.jpg")" width="96" height="96" alt="asp.net core" />
+                            <div class="h5">ASP.NET Core Geliştirme</div>
+                        </div>
+                        <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="300">
+                            <img class="mb-2" src="@Url.Content("~/hizmet3.jpg")" width="96" height="96" alt="backend" />
+                            <div class="h5">Back-end Geliştirme</div>
+                        </div>
+                        <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="400">
+                            <img class="mb-2" src="@Url.Content("~/hizmet4.jpg")" width="96" height="96" alt="api" />
+                            <div class="h5">API & Sistem Entegrasyonu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SKILLS -->
+            <div class="section px-3 px-lg-4 pt-5" id="skills">
+                <div class="container-narrow">
+                    <div class="text-center mb-5"><h2 class="marker marker-center">Yeteneklerim</h2></div>
+                    <div class="text-center"><p class="mx-auto mb-3" style="max-width:600px">Aşağıda teknik becerilerimi görebilirsiniz. Yeni teknolojileri hızlı öğrenebilirim.</p></div>
+                    <div class="bg-light p-3">
+                        <div class="row">
+                            @* Beceriler *@
+                            @{
+                                var skills = new List<(string, int)> {
+                                                        ("C#", 80), ("ASP.NET", 85), ("MVC", 90),
+                                                        ("N-tier Architecture", 85), ("Solid Principles", 70),
+                                                        ("Repository Design Pattern", 85), ("Code-first", 75),
+                                                        ("Db-first", 80), ("Dependency Injection", 75),
+                                                        ("OOP", 80), (".NET API - API Consume", 78), ("Python", 65)
+                                                        };
+                            }
+                            @foreach (var skill in skills)
+                            {
+                                <div class="col-md-12 py-1">
+                                    <div class="d-flex text-small fw-bolder"><span class="me-auto">@skill.Item1</span><span>@skill.Item2%</span></div>
+                                    <div class="progress my-1">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width:@skill.Item2%" aria-valuenow="@skill.Item2" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PORTFOLIO / PROJELER -->
+            <div class="section px-2 px-lg-4 pt-5" id="portfolio">
+                <div class="container">
+                    <div class="text-center mb-5"><h2 class="marker marker-center">Projelerim</h2></div>
+                    <div class="grid bp-gallery pb-3" data-aos="zoom-in-up" data-aos-delay="100">
+                        <div class="grid-sizer"></div>
+
+                        @* Projeleri döngüyle ekleyebiliriz veya manuel ekleyebiliriz *@
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/dRPvj3-N" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje1.jpg")" data-bp="~/proje1.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">ASP.NET Core Portfolio Projesi</h4>
+                                        <p>Admin panelli dinamik portfolio sistemi geliştirdim. Entity Framework Core, ViewComponents ve responsive tasarım kullanıldı.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/dT-wcsNT" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje2.jpg")" data-bp="~/proje2.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">Identity İşlemleri Projesi</h4>
+                                        <p>IdentityDbContext ile mesajlaşma sistemi geliştirdim. Authentication ve authorization süreçleri uygulandı.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/d6vajY3A" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje3.jpg")" data-bp="~/proje3.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">Jadoo Travel AI Projesi</h4>
+                                        <p>AI entegrasyonu ve MongoDB kullanılarak Tatil Rezervasyon uygulaması geliştirildi. Multi-language ve admin panel özellikleri mevcut.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/dXaQe-WH" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje4.jpg")" data-bp="~/proje4.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">Blogy CMS</h4>
+                                        <p>N katmanlı mimari, AI içerik üretimi, toksik yorum analizi ve rol yönetimi uygulandı.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/dx-aXKte" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje5.jpg")" data-bp="~/proje5.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">AiTech API Projesi</h4>
+                                        <p>RESTful API-first yaklaşımı ile geliştirilmiş, UI ve API ayrımı yapılmış projedir. Gemini AI ile etkileşim sağlanır.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/gs-96bs2" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje6.jpg")" data-bp="~/proje6.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">Rapid API & Travel Dashboard</h4>
+                                        <p>API servisleri ve Gemini AI ile dashboard uygulaması. Finans, hava durumu ve seyahat verileri tek ekranda sunulur.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/g_TeFPja" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje7.jpg")" data-bp="~/proje7.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">Dapper Project</h4>
+                                        <p>Dapper tabanlı CRUD işlemleri, 1 milyon kayıtlı veri yönetimi ve performans optimizasyonu.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        <div class="grid-item">
+                            <a href="https://lnkd.in/dSGz9iTV" target="_blank">
+                                <figure class="portfolio-item">
+                                    <img src="@Url.Content("~/proje8.jpg")" data-bp="~/proje8.jpg" />
+                                    <figcaption>
+                                        <h4 class="h5 mb-0">Medinova - AI & ML Healthcare System</h4>
+                                        <p>ML.NET ile tahminleme, Google Gemini AI, dinamik randevu yönetimi ve responsive dashboard içerir.</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deneyimler -->
+            <div class="section px-3 px-lg-4 pt-5" id="experience">
+                <div class="container-narrow">
+                    <div class="text-center mb-5"><h2 class="marker marker-center">Deneyimlerim</h2></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
+                                <div class="card-header px-3 py-2">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 class="h5 mb-1">Software Developer at DOF Robotics</h3>
+                                            <div class="text-muted text-small">17.02.2025 - 24.05.2026</div>
+                                        </div>
+                                        <img src="@Url.Content("~/deneyim1.jpg")" width="48" height="48" alt="DOF Robotics" />
+                                    </div>
+                                </div>
+                                <div class="card-body px-3 py-2">
+                                    <p>İstanbul Serbest İhtisas Bölgesi’nde DOF Robotics’te zorunlu stajımı tamamladım.</p>
+                                </div>
+                            </div>
+                            <div class="card mb-3" data-aos="fade-right" data-aos-delay="200">
+                                <div class="card-header px-3 py-2">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 class="h5 mb-1">M&Y Akademi Trainee</h3>
+                                            <div class="text-muted text-small">05.08.2025 - 01.03.2026</div>
+                                        </div>
+                                        <img src="@Url.Content("~/deneyim2.jpg")" width="48" height="48" alt="M&Y Akademi" />
+                                    </div>
+                                </div>
+                                <div class="card-body px-3 py-2">
+                                    <p>Murat Yücedağ Eğitim Akademi bünyesinde Full-Stack .NET Development bootcamp tamamlandı.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Referanslar -->
+            <div class="section px-3 px-lg-4 pt-5" id="testimonials">
+                <div class="container-narrow">
+                    <div class="text-center mb-5"><h2 class="marker marker-center">Referanslarım</h2></div>
+                    <div class="row">
+                        @* Referanslar *@
+                        <div class="col-md-12" data-aos="fade-right" data-aos-delay="100">
+                            <div class="d-flex ms-md-3">
+                                <span><i class="fas fa-2x fa-quote-left"></i></span>
+                                <span class="m-2">Saygılı, gelişime açık ve kendini sürekli geliştiren biri.</span>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-end">
+                                <div class="text-end me-2">
+                                    <div class="fw-bolder">Mahmut Haktan</div>
+                                    <div class="text-small">Database Administrator / Logo Yazılım</div>
+                                </div>
+                                <img class="me-md-3 rounded" src="@Url.Content("~/mahmutabi.jpg")" width="96" height="96" alt="Mahmut Haktan" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" data-aos="fade-right" data-aos-delay="200">
+                            <div class="d-flex ms-md-3">
+                                <span><i class="fas fa-2x fa-quote-left"></i></span>
+                                <span class="m-2">Dinlemesini bilen, öğrenmeye açık ve hevesli biri.</span>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-end">
+                                <div class="text-end me-2">
+                                    <div class="fw-bolder">Murat Yücedağ</div>
+                                    <div class="text-small">Full-Stack Trainer / M&Y Akademi</div>
+                                </div>
+                                <img class="me-md-3 rounded" src="@Url.Content("~/murat.jpg")" width="96" height="96" alt="Murat Yücedağ" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTACT / İLETİŞİM -->
+            <div class="section px-3 px-lg-4 pt-5" id="contact">
+                <div class="container-narrow">
+                    <div class="text-center mb-5"><h2 class="marker marker-center">İletişim</h2></div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h5>Bana Ulaşın</h5>
+                            <p>Email: <a href="mailto:abdullahhaktan9@gmail.com">abdullahhaktan9@gmail.com</a></p>
+                            <p>Telefon: <a href="tel:+905314945538">+90 531 494 5538</a></p>
+                            <p>Adres: Şükrüpaşa Mah. Selami Altınok Cad. 16/2/2 Erzurum/Yakutiye</p>
+                        </div>
+                        <div class="col-md-6">
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Adınız</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Mesajınız</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Gönder</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- #content -->
+    </div> <!-- .page-content -->
+    @await Html.PartialAsync("FooterPartial")
+
+    <script src="~/Template/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Template/js/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'slide',
+            once: true
+        });
+
+        // PDF İndir Butonu
+        document.getElementById("downloadPage").addEventListener("click", function () {
+            import('https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js')
+                .then((module) => {
+                    const element = document.getElementById("content");
+                    html2pdf().set({ filename: 'AbdullahHaktan_Portfolio.pdf', jsPDF: { orientation: 'portrait' } }).from(element).save();
+                });
+        });
+
+        // İletişim formu submit
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Mesajınız başarıyla gönderildi!");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
+

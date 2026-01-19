@@ -1,0 +1,35 @@
+﻿@using EntityLayer.Concrete
+@model List<ToDoList>
+
+<div class="card">
+     <div class="card-body">
+         <h4 class="card-title">Yapılacaklar Listesi</h4>
+
+            <!-- Yeni görev ekleme formu -->
+        <form action="/Dashboard/AddToDo/" method="post">
+             <div class="add-items d-flex">
+                 <input type="text" name="Content" class="form-control todo-list-input" placeholder="bir şeyler yazın.." required>
+                 <button type="submit" class="add btn btn-primary todo-list-add-btn">Ekle</button>
+             </div>
+         </form>
+
+            <!-- Görev listesi ve silme formu -->
+         <form id="deleteForm" method="post" action="/Dashboard/DeleteSelectedTodos">
+             <div class="list-wrapper mt-3">
+                 <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
+                     @foreach (var item in Model)
+                     {
+                         <li class="d-flex align-items-center justify-content-between">
+                            <div class="form-check form-check-primary">
+                                 <input class="form-check-input" type="checkbox" name="selectedIds[]" value="@item.ID" id="todo-@item.ID" />
+                                 <label class="form-check-label ms-2" for="todo-@item.ID">@item.Content</label>
+                             </div>
+                         </li>
+                     }
+                 </ul>
+             </div>
+
+             <button type="submit" class="btn btn-danger mt-3">Seçilenleri Sil</button>
+         </form>
+     </div>
+</div>

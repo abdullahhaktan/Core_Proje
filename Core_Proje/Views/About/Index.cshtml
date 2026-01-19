@@ -1,0 +1,87 @@
+﻿@model EntityLayer.Concrete.About
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "About", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description"> Hakkında Düzenleme Paneli </p>
+                <form class="forms-sample">
+                        @Html.HiddenFor(x => x.AboutID, new { @class = "form-control" })
+                    <div class="form-group">
+                        <label>Başlık</label>
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Yaş</label>
+                        @Html.TextBoxFor(x => x.Age, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Mail</label>
+                        @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Adres</label>
+                        @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Resim Seç - resminizin değişmesini istemiyorsanız seçim yapmayın</label>
+                        <br />
+                        <input type="file" asp-for="Image">
+                        @*<div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Resim yükleyin">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button">Yükle</button>
+                            </span>
+                        </div>*@
+                    </div>
+
+                    <br />
+
+                    <div class="form-group">
+                        <label>Açıklama</label>
+                        @Html.TextAreaFor(x => x.Description, 6, 3, new { @class = "form-control" })
+                    </div>
+
+                    <br />
+
+                    <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+                    <button class="btn btn-dark">İptal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        // TempData başarı mesajı gösterimi
+        var successMessage = '@(TempData["SuccessMessage"] ?? "")';
+        if (successMessage) {
+            swal({
+                title: "İşlem başarılı!",
+                text: successMessage,
+                icon: "success",
+                button: "Tamam",
+            });
+        }
+    });
+</script>

@@ -1,0 +1,43 @@
+﻿<li class="nav-item nav-profile d-flex align-items-center">
+    <!-- Profil resmi (tıklanmaz) -->
+    <a class="nav-link" href="/Writer/Profile/Index/">
+        <img src="@Url.Content(ViewBag.v)" alt="profile" />
+    </a>
+
+    <!-- Dropdown butonu (tıklanınca menü açılır) -->
+    <div class="nav-item dropdown ml-2">
+        <a class="nav-link dropdown-toggle" href="#" id="customDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-dots-vertical"></i> <!-- Dikey 3 nokta ikonu -->
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="customDropdown">
+            <a class="dropdown-item" href="/Writer/Dashboard/Index/">
+                <i class="icon-grid menu-icon"></i> Dashboard
+            </a>
+
+            <a class="dropdown-item" href="/Writer/Dashboard/Admin/">
+                <i class="ti-notepad menu-icon"></i> Admin Paneline Geç
+            </a>
+            <a class="dropdown-item" href="/Writer/Dashboard/Vitrin/">
+                <i class="ti-agenda menu-icon"></i> Vitrin Paneline Geç
+            </a>
+            <a class="dropdown-item" href="/Writer/Message1/Inbox/">
+                <i class="ti-notepad menu-icon"></i> Gelen Mesajlar
+            </a>
+            <a class="dropdown-item" href="/Writer/Message1/SendBox/">
+                <i class="ti-agenda menu-icon"></i> Giden Mesajlar
+            </a>
+            <a class="dropdown-item" href="/Writer/Message1/NewMessage/">
+                <i class="ti-cloud menu-icon"></i> Yeni Mesaj
+            </a>
+            <a class="dropdown-item" href="/Writer/Default/Index/">
+                <i class="ti-announcement menu-icon"></i> Duyurular
+            </a>
+            <a class="dropdown-item" href="/Writer/Profile/Index/">
+                <i class="ti-settings text-primary"></i> Ayarlar
+            </a>
+            <a class="dropdown-item" href="/Writer/Login/LogOut/">
+                <i class="ti-power-off text-primary"></i> Çıkış Yap
+            </a>
+        </div>
+    </div>
+</li>

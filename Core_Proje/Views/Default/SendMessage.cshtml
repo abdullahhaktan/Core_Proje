@@ -1,0 +1,33 @@
+﻿
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow p-4" style="width: 100%; max-width: 600px;">
+        <h4 class="text-center mb-4">İletişim Formu</h4>
+
+        @using (Html.BeginForm("MesajGonder", "Default", FormMethod.Post, new { id = "contact-form" }))
+        {
+            <div class="form-group mb-3">
+                <label for="FullName">Ad Soyad</label>
+                <input type="text" class="form-control form-control-lg" id="FullName" name="AdSoyad" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="mail">Mail</label>
+                <input type="email" class="form-control form-control-lg" id="mail" name="Mail" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="Subject">Konu</label>
+                <input type="text" class="form-control form-control-lg" id="Subject" name="Konu" required />
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="Message">Mesaj</label>
+                <textarea class="form-control form-control-lg" id="Message" name="Mesaj" rows="6" required></textarea>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">Gönder</button>
+
+        }
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@using EntityLayer.Concrete
+@model WriterMessage
+
+@{
+    ViewBag.Title = "GetMessageDetails";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+<style>
+    .simple-btn {
+    background-color: transparent;
+    border: 2px solid #4CAF50; /* Çerçeve rengini yeşil yap */
+    color: #4CAF50; /* Yalnızca metin rengi yeşil */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+
+    .simple-btn:hover {
+    background-color: #4CAF50;
+    color: white; /* Hover sırasında metin rengini beyaz yap */
+    }
+
+</style>
+
+<!DOCTYPE html>
+<html>
+
+<body class="hold-transition sidebar-mini">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Mesaj Detayları</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                @await Html.PartialAsync("/Areas/Writer/Views/Message1/MessageListMenu.cshtml")
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <h5 class="fw-semibold mb-3 text-primary">📨 Mesajı Oku</h5>
+                        <h4 class="fw-bold text-dark">@Html.DisplayFor(model => model.Subject)</h4>
+                        <p class="text-muted mb-1">Kime: @Html.DisplayFor(model => model.ReceiverMail)</p>
+                        <p class="text-muted mb-3">Gönderen: @Html.DisplayFor(model => model.SenderMail)</p>
+                        <p class="text-dark" style="line-height: 1.6;">@Html.DisplayFor(model => model.MessageContent)</p>
+                        <p class="text-end text-muted small mt-4">@Model.MessageDate.ToString("dd.MMM.yyyy")</p>
+
+                        <hr />
+
+                        @{
+                            if (TempData["isSendBox"] != null && bool.TryParse(TempData["isSendBox"].ToString(), out bool isSendBox) && isSendBox)
+                            {
+                                //nothing
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary" href="@Url.Action("NewMessage", "Message1", new { area = "Writer", mail = Model.SenderMail})">Yanıt ver </a>
+                            }
+                        }
+
+
+
+                        
+
+                    </div>
+
+                </div>
+                <!-- /.col -->
+
+
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿@model EntityLayer.Concrete.Service
+
+@{
+    ViewData["Title"] = "EditService";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<div class="card-header border-0">
+    <h3 class="mb-0">Hizmet Düzenleme Sayfası</h3>
+</div>
+@using (Html.BeginForm("EditService", "Service", FormMethod.Post,new {enctype="multipart/form-data"}))
+{
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description"> Hizmet Ekleme Paneli </p>
+                <form class="forms-sample">
+                    @Html.HiddenFor(x => x.ServiceID)
+                    <br />
+                    @Html.Label("Hizmet Başlığı")
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                    <br />
+                    <div class="form-group">
+                        <label>Resim Seç - Eğer var olan resminizi değiştrimek istemiyorsanız seçim yapmayın</label>
+                        <br />
+                        <input type="file" asp-for="Image">
+                        @*<div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Resim yükleyin">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button">Yükle</button>
+                            </span>
+                        </div>*@
+                    </div>                    <br />
+                    <button class="btn btn-outline-success">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}

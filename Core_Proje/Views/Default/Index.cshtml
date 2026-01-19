@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+@await Html.PartialAsync("HeaderPartial")
+
+<body id="top">
+
+    @await Html.PartialAsync("NavbarPartial")
+
+    <!-- 📄 PDF İndir Butonu -->
+    <div style="text-align: center; margin: 20px 0;">
+        <button id="downloadPage" class="btn btn-primary" style="padding: 10px 20px; font-size: 16px;">
+            📄 Sayfayı PDF Olarak İndir
+        </button>
+    </div>
+
+    <div class="page-content">
+        <div id="content">
+
+            @await Component.InvokeAsync("FeatureList")
+            @await Component.InvokeAsync("AboutList")
+            @await Component.InvokeAsync("ServiceList")
+            @await Component.InvokeAsync("SkillList")
+            @await Component.InvokeAsync("PortfolioList")
+            @await Component.InvokeAsync("ExperienceList")
+            @await Component.InvokeAsync("TestimonialList")
+            <br />
+
+            <footer class="pt-4 pb-4 text-center bg-light">
+                <div class="container">
+                    <div class="my-3">
+                        <div class="h4">@ViewBag.nameSurname</div>
+                        <p>@ViewBag.job</p>
+                        <div class="social-nav">
+                            <nav role="navigation">
+                                <ul class="nav justify-content-center">
+                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-linkedin"></i></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-behance"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="text-small text-secondary">
+                        <div class="mb-1">&copy; @DateTime.Now.Year. Tüm hakları saklıdır.</div>
+                        <div>Html5 Tema - <a href="https://templateflip.com/" target="_blank">TemplateFlip</a></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div id="scrolltop">
+        <a class="btn btn-secondary" href="#top"><span class="icon"><i class="fas fa-angle-up fa-x"></i></span></a>
+    </div>
+
+    <!-- JS Kütüphaneleri -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- 📄 Tek sayfa PDF oluşturma -->
+    <script>
+        document.getElementById("downloadPage").addEventListener("click", function () {
+            const element = document.getElementById("content");
+
+            // Dinamik format: içerik boyutu kadar PDF oluşturur
+            const opt = {
+                margin: 0,
+                filename: 'cv-sayfa.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 3, backgroundColor: "#ffffff" },
+                jsPDF: {
+                    unit: 'px',
+                    format: [element.scrollWidth, element.scrollHeight],
+                    orientation: 'portrait'
+                }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
+
+    <!-- Mevcut scriptlerin -->
+    <script src="~/Template/scripts/imagesloaded.pkgd.min.js?ver=1.2.0"></script>
+    <script src="~/Template/scripts/masonry.pkgd.min.js?ver=1.2.0"></script>
+    <script src="~/Template/scripts/BigPicture.min.js?ver=1.2.0"></script>
+    <script src="~/Template/scripts/purecounter.min.js?ver=1.2.0"></script>
+    <script src="~/Template/scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
+    <script src="~/Template/scripts/aos.min.js?ver=1.2.0"></script>
+    <script src="~/Template/scripts/main.js?ver=1.2.0"></script>
+</body>
+</html>
