@@ -124,8 +124,8 @@ This project requires **.NET SDK** and a **database server** to run.
 
 🌐 Live Project  
 
-🔗 [abdullahhaktan.com.tr](http://abdullah.haktan.com.tr)  
+🔗 [abdullahhaktan.com.tr](http://abdullahhaktan.com.tr)  
 
 🌐 Live Portfolio
 
-🔗 [abdullahhaktan.com.tr/Default/AbdullahhaktanCV](http://abdullah.haktan.com.tr/Default/AbdullahhaktanCV)  
+🔗 [abdullahhaktan.com.tr/Default/AbdullahhaktanCV](http://abdullahhaktan.com.tr/Default/AbdullahhaktanCV)  
