@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using MailKit.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +20,19 @@ namespace Core_Proje.Controllers
     {
         private readonly UserManager<WriterUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly string _smtpHost;
+        private readonly int _smtpPort;
+        private readonly string _smtpUserName;
+        private readonly string _smtpPassword;
 
         public DefaultController(UserManager<WriterUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _smtpHost = configuration["Mail:SmtpHost"];
+            _smtpPort = int.Parse(configuration["Mail:SmtpPort"]);
+            _smtpUserName = configuration["Mail:SmtpUserName"];
+            _smtpPassword = configuration["Mail:SmtpPassword"];
         }
 
         private readonly AboutManager _aboutManager = new AboutManager(new EfAboutDal());
@@ -104,6 +114,36 @@ namespace Core_Proje.Controllers
             {
                 return BadRequest("Mail gönderilirken hata oluştu: " + ex.Message);
             }
+        }
+
+        //this is used for default AbdullahhaktanCV mail sending
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> SendMessage(string subject, string message, string name, string email)
+        {
+            var mimeMessage = new MimeMessage();
+
+            mimeMessage.From.Add(new MailboxAddress("Portfolio Site", _smtpUserName));
+            mimeMessage.To.Add(MailboxAddress.Parse(_smtpUserName)); // Kendine gönder
+            mimeMessage.Subject = subject;
+
+            mimeMessage.Body = new TextPart("plain")
+            {
+                Text = $"Gönderen: {name}\n" +
+                       $"Email: {email}\n\n" +
+                       $"Mesaj:\n{message}"
+            };
+
+            using (var client = new SmtpClient())
+            {
+                await client.ConnectAsync(_smtpHost, _smtpPort, SecureSocketOptions.StartTls);
+                await client.AuthenticateAsync(_smtpUserName, _smtpPassword);
+                await client.SendAsync(mimeMessage);
+                await client.DisconnectAsync(true);
+            }
+
+            return RedirectToAction("AbdullahHaktanCV"); // veya Ok()
         }
 
     }
